@@ -95,4 +95,23 @@ func TestRandBytes(t *testing.T) {
 		"null bytes slice must be equal to []byte{}",
 	)
 	assert.Equal(t, reflect.Slice, reflect.ValueOf(randBytes).Kind())
+
+	// 正常情况测试用例
+	// case 1
+	b := RandBytes(3)
+	if len(b) != 3 {
+		t.Fatal("Data length is not three")
+	}
+
+	// case 2
+	b = RandBytes(4)
+	if len(b) != 4 {
+		t.Fatal("Data length is not four")
+	}
+
+	// 异常测试用例
+	// case 3
+	b = RandBytes(-1)
+	assert.Equal(t, b, nil)
+
 }
