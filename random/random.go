@@ -46,9 +46,7 @@ func RandBytes(length int) []byte {
 		return []byte{}
 	}
 	b := make([]byte, length)
-	if _, err := io.ReadFull(craned.Reader, b); err != nil {
-		return nil
-	}
+	_, _ = io.ReadFull(craned.Reader, b)
 
 	return b
 }
