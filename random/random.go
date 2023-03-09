@@ -4,7 +4,7 @@
 // @FileName    : random.go
 // @Software    : GoLand
 // @WeChat      : Navalism1
-// @Description : 
+// @Description :
 
 // Package random implements some function to generate random Alphabet or EnglishString
 package random
@@ -49,18 +49,18 @@ func RandBytes(length int) []byte {
 	if _, err := io.ReadFull(craned.Reader, b); err != nil {
 		return nil
 	}
-	
+
 	return b
 }
 
 // RandFromString 从一段给定字符串中生成一定长度的字符串
 func RandFromString(s string, length int) string {
 	b := make([]byte, length)
-	
+
 	for i := range b {
 		b[i] = s[rand.Int63()%int64(len(s))]
 	}
-	
+
 	return string(b)
 }
 
@@ -92,15 +92,15 @@ func RandEnglishString(length int) string {
 // UUIdV4 生成依据RFC 4122 的UUID
 func UUIdV4() (string, error) {
 	uuid := make([]byte, 16)
-	
+
 	n, err := io.ReadFull(craned.Reader, uuid)
 	if n != len(uuid) || err != nil {
 		return "", err
 	}
-	
+
 	uuid[8] = uuid[8]&^0xc0 | 0x80
 	uuid[6] = uuid[6]&^0xf0 | 0x40
-	
+
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10],
 		uuid[10:],
 	), nil
