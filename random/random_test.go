@@ -4,7 +4,7 @@
 // @FileName    : random_test.go.go
 // @Software    : GoLand
 // @WeChat      : Navalism1
-// @Description : 
+// @Description :
 
 package random
 
@@ -12,12 +12,12 @@ import (
 	"reflect"
 	"regexp"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
 func TestUUIdV4(t *testing.T) {
-	
+
 	uuid, err := UUIdV4()
 	if err != nil {
 		t.Log(err)
@@ -31,10 +31,10 @@ func TestRandBetween(t *testing.T) {
 	r1 := RandBetween(1, 10)
 	assert.GreaterOrEqual(t, r1, 1)
 	assert.Less(t, r1, 10)
-	
+
 	r2 := RandBetween(1, 1)
 	assert.Equal(t, 1, r2)
-	
+
 	r3 := RandBetween(10, 1)
 	assert.GreaterOrEqual(t, r1, 1)
 	assert.Less(t, r3, 10)
@@ -45,7 +45,7 @@ func TestRandFromString(t *testing.T) {
 	for i := 0; i < len(c); i++ {
 		assert.Contains(t, Alphabet, string(c[i]))
 	}
-	
+
 	s := "213sadkasj209m231-a."
 	z := RandFromString(s, 10)
 	for i := 0; i < len(c); i++ {
@@ -82,7 +82,7 @@ func TestRandLowerString(t *testing.T) {
 }
 
 func TestRandEnglishString(t *testing.T) {
-	r := RandLowerString(10)
+	r := RandEnglishString(10)
 	for i := 0; i < len(r); i++ {
 		assert.Contains(t, EnglishString, string(r[i]))
 	}
