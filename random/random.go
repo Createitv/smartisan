@@ -6,7 +6,7 @@
 // @WeChat      : Navalism1
 // @Description :
 
-// Package random implements some function to generate random Alphabet or EnglishString
+// Package random implements some function to generate random Letters or ASCIICharacters
 package random
 
 import (
@@ -18,11 +18,16 @@ import (
 )
 
 const (
-	ArabicNumerals = "0123456789"
-	LowerCharacter = "abcdefghijklmnopqrstuvwxyz"
-	UpperCharacter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	Alphabet       = LowerCharacter + UpperCharacter
-	EnglishString  = Alphabet + ArabicNumerals
+	Digits                string = "0123456789"                                                         // Digits: [0-9]
+	ASCIILettersLowercase string = "abcdefghijklmnopqrstuvwxyz"                                         // Ascii Lowerrcase Letters: [a-z]
+	ASCIILettersUppercase string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"                                         // Ascii Uppercase Letters: [A-Z]
+	Letters               string = ASCIILettersLowercase + ASCIILettersUppercase                        // Ascii Letters: [a-zA-Z]
+	ASCIICharacters       string = Letters + Digits                                                     // Ascii Charaters: [a-zA-Z0-9]
+	Hexdigits             string = "0123456789abcdefABCDEF"                                             // Hex Digits: [0-9a-fA-F]
+	Octdigits             string = "01234567"                                                           // Octal Digits: [0-7]
+	Punctuation           string = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"                                 // Punctuation and special characters
+	Printable             string = Digits + ASCIILettersLowercase + ASCIILettersUppercase + Punctuation // Printable
+
 )
 
 func init() {
@@ -64,27 +69,27 @@ func RandFromString(s string, length int) string {
 
 // RandNumber 生成 length 长度的只有数字的字符串
 func RandNumber(length int) string {
-	return RandFromString(ArabicNumerals, length)
+	return RandFromString(Digits, length)
 }
 
 // RandString 生成 length 长度的只有52个大小写英文字母的字符串
 func RandString(length int) string {
-	return RandFromString(Alphabet, length)
+	return RandFromString(Letters, length)
 }
 
 // RandUpperString 生成 length 长度的只有26个大写英文字母的字符串
 func RandUpperString(length int) string {
-	return RandFromString(UpperCharacter, length)
+	return RandFromString(ASCIILettersUppercase, length)
 }
 
 // RandLowerString 生成 length 长度的只有26个小写英文字母的字符串
 func RandLowerString(length int) string {
-	return RandFromString(LowerCharacter, length)
+	return RandFromString(ASCIILettersLowercase, length)
 }
 
 // RandEnglishString 生成 length 长度的只有52个大小写英文字母 + 数字的字符串
 func RandEnglishString(length int) string {
-	return RandFromString(EnglishString, length)
+	return RandFromString(ASCIICharacters, length)
 }
 
 // UUIdV4 生成依据RFC 4122 的UUID
@@ -102,4 +107,21 @@ func UUIdV4() (string, error) {
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10],
 		uuid[10:],
 	), nil
+}
+
+// Choice makes a random choice from a slice of string.
+func Choice(j []string) string {
+	choose := RandBetween(0, len(j))
+
+	return j[choose]
+}
+
+// RandHex 生成 length 长度的只有16进制数字的字符串
+func RandHex(length int) string {
+	return RandFromString(Hexdigits, length)
+}
+
+// RandOct 生成 length 长度的只有8进制数字的字符串
+func RandOct(length int) string {
+	return RandFromString(Octdigits, length)
 }

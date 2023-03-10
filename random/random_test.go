@@ -1,4 +1,4 @@
-// Copyright 2023 xfy150150@gmail.com. All rights reserved.
+// Copyright 2023 xfy150150@gmleftil.com. All rights reserved.
 // @Time        : 2023/3/9 22:17
 // @Author      : Createitv
 // @FileName    : random_test.go.go
@@ -9,6 +9,7 @@
 package random
 
 import (
+	"fmt"
 	"reflect"
 	"regexp"
 	"testing"
@@ -40,10 +41,26 @@ func TestRandBetween(t *testing.T) {
 	assert.Less(t, r3, 10)
 }
 
+func ExampleRandBetween() {
+	result := RandBetween(1, 10)
+	if result >= 1 && result < 10 {
+		fmt.Println("ok")
+	}
+
+	result = RandBetween(-11, 10)
+	if result >= -11 && result < 10 {
+		fmt.Println("ok")
+	}
+
+	// Output:
+	// ok
+	// ok
+}
+
 func TestRandFromString(t *testing.T) {
-	c := RandFromString(Alphabet, 10)
+	c := RandFromString(Letters, 10)
 	for i := 0; i < len(c); i++ {
-		assert.Contains(t, Alphabet, string(c[i]))
+		assert.Contains(t, Letters, string(c[i]))
 	}
 
 	s := "213sadkasj209m231-a."
@@ -56,35 +73,35 @@ func TestRandFromString(t *testing.T) {
 func TestRandNumber(t *testing.T) {
 	r := RandNumber(10)
 	for i := 0; i < len(r); i++ {
-		assert.Contains(t, ArabicNumerals, string(r[i]))
+		assert.Contains(t, Digits, string(r[i]))
 	}
 }
 
 func TestRandString(t *testing.T) {
 	r := RandString(10)
 	for i := 0; i < len(r); i++ {
-		assert.Contains(t, Alphabet, string(r[i]))
+		assert.Contains(t, Letters, string(r[i]))
 	}
 }
 
 func TestRandUpperString(t *testing.T) {
 	r := RandUpperString(10)
 	for i := 0; i < len(r); i++ {
-		assert.Contains(t, UpperCharacter, string(r[i]))
+		assert.Contains(t, ASCIILettersUppercase, string(r[i]))
 	}
 }
 
 func TestRandLowerString(t *testing.T) {
 	r := RandLowerString(10)
 	for i := 0; i < len(r); i++ {
-		assert.Contains(t, LowerCharacter, string(r[i]))
+		assert.Contains(t, ASCIILettersLowercase, string(r[i]))
 	}
 }
 
 func TestRandEnglishString(t *testing.T) {
 	r := RandEnglishString(10)
 	for i := 0; i < len(r); i++ {
-		assert.Contains(t, EnglishString, string(r[i]))
+		assert.Contains(t, ASCIICharacters, string(r[i]))
 	}
 }
 
@@ -114,4 +131,23 @@ func TestRandBytes(t *testing.T) {
 	b = RandBytes(-1)
 	assert.Equal(t, b, []byte{})
 
+}
+
+func TestChoice(t *testing.T) {
+	r := Choice([]string{"a", "b", "c", "d", "e"})
+	assert.Contains(t, []string{"a", "b", "c", "d", "e"}, r)
+}
+
+func TestRandHex(t *testing.T) {
+	r := RandHex(10)
+	for i := 0; i < len(r); i++ {
+		assert.Contains(t, Hexdigits, string(r[i]))
+	}
+}
+
+func TestRandOct(t *testing.T) {
+	r := RandOct(10)
+	for i := 0; i < len(r); i++ {
+		assert.Contains(t, Octdigits, string(r[i]))
+	}
 }
