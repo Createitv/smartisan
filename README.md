@@ -37,7 +37,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## Author
-panghuang@gmail.com
+## Author 与我联系
+panghuang@gmail.com 
+![微信号二维码](https://user-images.githubusercontent.com/39019652/224209417-1720e3de-11db-4ff9-86dc-cd76735283bd.png)
 
 
